@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IInventory
 {
-    void AddItem(GameObject item);
+    bool AddItem(GameObject item);
 }

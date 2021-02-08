@@ -49,6 +49,14 @@ namespace Valve.VR
             }
         }
         
+        public virtual SteamVR_Action_Pose Hand
+        {
+            get
+            {
+                return SteamVR_Actions.default_Hand;
+            }
+        }
+        
         public virtual SteamVR_Action_Vibration Haptic
         {
             get

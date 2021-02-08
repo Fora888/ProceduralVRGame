@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 using Valve.VR;
 
@@ -31,6 +30,7 @@ public class HandItemInteractions : MonoBehaviour
     {
         if (grabbedObject == null)
         {
+            Debug.DrawLine(transform.position, transform.position + transform.right * handDirection * grabDistance);
             if (Physics.Raycast(transform.position, transform.right * handDirection, out RaycastHit grabHit, grabDistance, itemLayerMask))
             {
                 grabbedObject = grabHit.transform.gameObject;
@@ -48,10 +48,13 @@ public class HandItemInteractions : MonoBehaviour
     {
         if (grabbedObject == true)
         {
-            Collider[] inventoryCollider = Physics.OverlapSphere(transform.position, 0, inventoryLayerMask);
+            Collider[] inventoryCollider = Physics.OverlapSphere(transform.position, 0.2f, inventoryLayerMask);
             if (inventoryCollider.Length > 0)
             {
-                Debug.Log("cum");
+                if(inventoryCollider[0].gameObject.GetComponent<IInventory>().AddItem(grabbedObject))
+                {
+                    Destroy(grabbedObject);
+                }
             }
             else
             {

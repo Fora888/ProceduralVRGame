@@ -7,15 +7,23 @@
     },
     {
       "name": "/actions/Default/in/Grab",
-      "type": "boolean"
+      "type": "boolean",
+      "requirement": "mandatory"
     },
     {
       "name": "/actions/Default/in/MenuInteraction",
-      "type": "boolean"
+      "type": "boolean",
+      "requirement": "mandatory"
     },
     {
       "name": "/actions/Default/in/Menu",
-      "type": "boolean"
+      "type": "boolean",
+      "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/Default/in/Hand",
+      "type": "pose",
+      "requirement": "mandatory"
     },
     {
       "name": "/actions/Default/out/Haptic",

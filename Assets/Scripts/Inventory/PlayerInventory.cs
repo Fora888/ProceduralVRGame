@@ -1,27 +1,27 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using static MeshCalculation;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour, IInventory
 {
-    public int[,] inventory;
-    private void Start()
+    public Inventory inventory;
+    public bool printInventory;
+    void Start()
     {
-        inventory = new int[10,2];
+        inventory = new Inventory(10);
     }
-    public void AddItem(GameObject Item)
+    public bool AddItem(GameObject Item)
     {
-
+        return inventory.AddItem(Item.name, CalculateVolume(Item.GetComponent<MeshFilter>().sharedMesh, Item.transform.lossyScale));
     }
-
-    public bool ContainsID(int iD)
+    private void OnValidate()
     {
-        for(int i = 0; i < inventory.GetLength(0); i++)
+        if(printInventory == true)
         {
-            if (inventory[i,0] == iD)
-                return true;
+            for(int i = 0; i < inventory.numberOfSlots; i++)
+            {
+                Debug.Log(inventory.GetName(i) + ", " + inventory.GetCount(i));
+            }
+            printInventory = false;
         }
-        return false;
     }
 }

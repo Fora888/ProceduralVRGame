@@ -25,6 +25,8 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_default_Menu;
         
+        private static SteamVR_Action_Pose p_default_Hand;
+        
         private static SteamVR_Action_Vibration p_default_Haptic;
         
         public static SteamVR_Action_Vector2 default_Move
@@ -59,6 +61,14 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Action_Pose default_Hand
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_Hand.GetCopy<SteamVR_Action_Pose>();
+            }
+        }
+        
         public static SteamVR_Action_Vibration default_Haptic
         {
             get
@@ -74,17 +84,20 @@ namespace Valve.VR
                     SteamVR_Actions.default_Grab,
                     SteamVR_Actions.default_MenuInteraction,
                     SteamVR_Actions.default_Menu,
+                    SteamVR_Actions.default_Hand,
                     SteamVR_Actions.default_Haptic};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.ISteamVR_Action_In[] {
                     SteamVR_Actions.default_Move,
                     SteamVR_Actions.default_Grab,
                     SteamVR_Actions.default_MenuInteraction,
-                    SteamVR_Actions.default_Menu};
+                    SteamVR_Actions.default_Menu,
+                    SteamVR_Actions.default_Hand};
             Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[] {
                     SteamVR_Actions.default_Haptic};
             Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[] {
                     SteamVR_Actions.default_Haptic};
-            Valve.VR.SteamVR_Input.actionsPose = new Valve.VR.SteamVR_Action_Pose[0];
+            Valve.VR.SteamVR_Input.actionsPose = new Valve.VR.SteamVR_Action_Pose[] {
+                    SteamVR_Actions.default_Hand};
             Valve.VR.SteamVR_Input.actionsBoolean = new Valve.VR.SteamVR_Action_Boolean[] {
                     SteamVR_Actions.default_Grab,
                     SteamVR_Actions.default_MenuInteraction,
@@ -107,6 +120,7 @@ namespace Valve.VR
             SteamVR_Actions.p_default_Grab = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Default/in/Grab")));
             SteamVR_Actions.p_default_MenuInteraction = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Default/in/MenuInteraction")));
             SteamVR_Actions.p_default_Menu = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Default/in/Menu")));
+            SteamVR_Actions.p_default_Hand = ((SteamVR_Action_Pose)(SteamVR_Action.Create<SteamVR_Action_Pose>("/actions/Default/in/Hand")));
             SteamVR_Actions.p_default_Haptic = ((SteamVR_Action_Vibration)(SteamVR_Action.Create<SteamVR_Action_Vibration>("/actions/Default/out/Haptic")));
         }
     }

@@ -6,15 +6,14 @@ using UnityEngine;
 public class TrackingLocationFollower : MonoBehaviour
 {
     public GameObject handTrackingLocation;
+    public float maxHandVelocity = 10;
     private Transform trackedHandTransform,inGameHandTransform;
     private Rigidbody inGameHandRigidbody;
     private Vector3 differenceVector,inGameHandPosition,trackedPosition;
-    private List<Vector3> collisionNormals;
     public float speed;
     // Start is called before the first frame update
     void Start()
     {
-        collisionNormals = new List<Vector3>();
         trackedHandTransform = handTrackingLocation.GetComponent<Transform>();
         inGameHandTransform = GetComponent<Transform>();
         inGameHandRigidbody = GetComponent<Rigidbody>();
@@ -36,6 +35,7 @@ public class TrackingLocationFollower : MonoBehaviour
     void calculateAndApplySpeed()
     {
         speed = differenceVector.magnitude / Time.deltaTime;
+        speed = speed > maxHandVelocity ? maxHandVelocity : speed;
         inGameHandRigidbody.velocity = differenceVector.normalized * speed;
     }
 
