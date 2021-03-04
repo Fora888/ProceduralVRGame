@@ -9,12 +9,16 @@ public class HandItemInteractions : MonoBehaviour
     public SteamVR_Input_Sources handType;
     private int handDirection = 1, itemLayerMask, inventoryLayerMask;
     public float grabDistance;
+    public GameObject tablet;
+    public Vector3 tabletHoldingPosition, tabletHoldingRotation;
     private GameObject grabbedObject;
     private Rigidbody grabbedObjectRigidbody;
     private TerrainGenerator terrainGenerator;
+    private new Rigidbody rigidbody;
     // Start is called before the first frame update
     void Start()
     {
+        rigidbody = GetComponent<Rigidbody>();
         grabButton.AddOnStateDownListener(Grab, handType);
         grabButton.AddOnStateUpListener(LetGo, handType);
         if (handType == SteamVR_Input_Sources.RightHand)
@@ -30,7 +34,6 @@ public class HandItemInteractions : MonoBehaviour
     {
         if (grabbedObject == null)
         {
-            Debug.DrawLine(transform.position, transform.position + transform.right * handDirection * grabDistance);
             if (Physics.Raycast(transform.position, transform.right * handDirection, out RaycastHit grabHit, grabDistance, itemLayerMask))
             {
                 grabbedObject = grabHit.transform.gameObject;
@@ -41,6 +44,24 @@ public class HandItemInteractions : MonoBehaviour
                 }
                 grabbedObject.transform.parent = transform;
             }
+            else
+            {
+                Collider[] inventoryCollider = Physics.OverlapSphere(transform.position, 0.2f, inventoryLayerMask);
+                if (inventoryCollider.Length > 0)
+                {
+                    foreach (Collider collider in inventoryCollider)
+                    {
+                        if(collider.gameObject.name == "PlayerInventory")
+                        {
+                            tablet.SetActive(true);
+                            grabbedObject = tablet;
+                            grabbedObject.transform.parent = transform;
+                            grabbedObject.transform.localPosition = tabletHoldingPosition * handDirection;
+                            grabbedObject.transform.localEulerAngles = tabletHoldingRotation * handDirection;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -48,17 +69,28 @@ public class HandItemInteractions : MonoBehaviour
     {
         if (grabbedObject == true)
         {
-            Collider[] inventoryCollider = Physics.OverlapSphere(transform.position, 0.2f, inventoryLayerMask);
-            if (inventoryCollider.Length > 0)
+            if (grabbedObject != tablet)
             {
-                if(inventoryCollider[0].gameObject.GetComponent<IInventory>().AddItem(grabbedObject))
+                Collider[] inventoryCollider = Physics.OverlapSphere(transform.position, 0.2f, inventoryLayerMask);
+                if (inventoryCollider.Length > 0)
                 {
-                    Destroy(grabbedObject);
+                    if (inventoryCollider[0].gameObject.GetComponent<IInventory>().AddItem(grabbedObject))
+                    {
+                        Destroy(grabbedObject);
+                    }
+                }
+                else
+                {
+                    Rigidbody grabbedObjectRigidbody = grabbedObject.AddComponent<Rigidbody>();
+                    grabbedObjectRigidbody.velocity = rigidbody.velocity;
+                    grabbedObjectRigidbody.angularVelocity = rigidbody.angularVelocity;
+                    grabbedObject.transform.parent = terrainGenerator.generatedChunks[(int)terrainGenerator.relativePlayerPosition.x, (int)terrainGenerator.relativePlayerPosition.y].transform;
+                    grabbedObject = null;
+                    ;
                 }
             }
             else
             {
-                grabbedObject.AddComponent<Rigidbody>();
                 grabbedObject.transform.parent = terrainGenerator.generatedChunks[(int)terrainGenerator.relativePlayerPosition.x, (int)terrainGenerator.relativePlayerPosition.y].transform;
                 grabbedObject = null;
             }

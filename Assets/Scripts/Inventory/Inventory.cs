@@ -47,22 +47,7 @@ public class Inventory
 
     public float RetriveItem(int index, float count)
     {
-        float retrivedCount = 0;
-        if (slots[index].count != 0)
-        {
-            if (slots[index].count <= count)
-            {
-                retrivedCount = slots[index].count;
-                slots[index].count = 0;
-                slots[index].name = null;
-            }
-            else
-            {
-                retrivedCount = count;
-                slots[index].count -= count;
-            }
-        }
-        return retrivedCount;
+        return slots[index].RetriveItem(count);
     }
     
     public InventorySlot GetSlot(int index)

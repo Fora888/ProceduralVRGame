@@ -6,7 +6,7 @@ using UnityEngine;
 public class TrackingLocationFollower : MonoBehaviour
 {
     public GameObject handTrackingLocation;
-    public float maxHandVelocity = 10;
+    public float maxHandVelocity = 10, maxHandAcceleration = 15;
     private Transform trackedHandTransform,inGameHandTransform;
     private Rigidbody inGameHandRigidbody;
     private Vector3 differenceVector,inGameHandPosition,trackedPosition;

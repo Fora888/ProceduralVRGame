@@ -1,0 +1,9 @@
+{
+	"displayName" : "Wood",
+	"name" : "default:wood",
+	"texture" : "wood",
+	"alias" : 
+	[
+		"default:stick"
+	]
+}

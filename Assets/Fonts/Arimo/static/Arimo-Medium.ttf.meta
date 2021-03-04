@@ -1,0 +1,31 @@
+fileFormatVersion: 2
+guid: 5ee6c779c909d0f49bf6acea5fd31d89
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Arimo
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 7d6c3c7cb26060d45ab41f136892bb73, type: 3}
+  - {fileID: 12800000, guid: 3334244dcc40c9c4d908a93ca161ce2d, type: 3}
+  - {fileID: 12800000, guid: b1a5960b6734fa148b8d385ad85a1a5c, type: 3}
+  - {fileID: 12800000, guid: 16fa5805fcadd004d94d5b406fe747c1, type: 3}
+  - {fileID: 12800000, guid: 1e5730eb85b1f7d4cb0361f71ba38fa1, type: 3}
+  - {fileID: 12800000, guid: 4a8d8e81353bb364bb95516642db829c, type: 3}
+  - {fileID: 12800000, guid: 2778d6d1abe4da74295e584e6d1b4587, type: 3}
+  - {fileID: 12800000, guid: f19aa621b60ae9548b315c518dbdf0ff, type: 3}
+  - {fileID: 12800000, guid: dd043de16da192544b1350844af29682, type: 3}
+  - {fileID: 12800000, guid: d31cbd72b5dd2104f8c762d8d465e4f6, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -45,15 +45,6 @@
             },
             {
                "inputs" : {
-                  "position" : {
-                     "output" : "/actions/default/in/move"
-                  }
-               },
-               "mode" : "joystick",
-               "path" : "/user/hand/right/input/joystick"
-            },
-            {
-               "inputs" : {
                   "click" : {
                      "output" : "/actions/default/in/grab"
                   }
@@ -87,6 +78,15 @@
                },
                "mode" : "button",
                "path" : "/user/hand/left/input/application_menu"
+            },
+            {
+               "inputs" : {
+                  "position" : {
+                     "output" : "/actions/default/in/move"
+                  }
+               },
+               "mode" : "joystick",
+               "path" : "/user/hand/left/input/joystick"
             }
          ]
       },

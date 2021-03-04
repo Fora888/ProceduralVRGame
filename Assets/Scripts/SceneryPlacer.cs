@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
@@ -65,8 +66,15 @@ public class SceneryPlacer : MonoBehaviour
     //Loads all Prefabs in a Folder
     public void OnValidate()
     {
-        if(ReloadStones == true)
-            stonePrefabs = Resources.LoadAll("Stones", typeof(GameObject));
+        if (ReloadStones == true)
+        {
+            string[] files = Directory.GetFiles("Assets/Models/Stones", "*.fbx");
+            stonePrefabs = new Object[files.Length - 1];
+            for(int i = 0; i < files.Length-1; i++)
+            {
+                stonePrefabs[i] = AssetDatabase.LoadAssetAtPath(files[i], typeof (Object));
+            }
+        }
         ReloadStones = false;
     }
 }

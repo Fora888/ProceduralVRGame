@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Terrain
   - World
+  - Menu
+  - MaterialDictionary
   layers:
   - Default
   - TransparentFX
